@@ -54,16 +54,21 @@ for paragraph in document.paragraphs:
     if paragraph.style.name == 'Normal':
         paragraph.text = '<p>' + paragraph.text + '</p>'
 
-# durchläuft alle Absätze und sucht Paragraphen mit Bullets und fügt davor "<ul>" ein und danach "</ul>"
+# durchläuft alle Absätze und sucht Paragraphen mit Bullets und fügt "<ul>" davor und "</ul>" danach ein.
 for paragraph in document.paragraphs:
     if paragraph.style.name == 'List Bullet':
         paragraph.text = '<ul>' + paragraph.text + '</ul>'
 
-# durchläuft alle Absätze und sucht Paragraphen, die nummeriert sind, und fügt davor "<ol>" ein und danach "</ol>"
+# durchläuft alle Absätze und sucht Paragraphen mit Bullets und formatiert den paragraphen als "normalen" Text
+for paragraph in document.paragraphs:
+    if paragraph.style.name == 'List Bullet': # formatiert den paragraphen als "normalen" Text 
+        paragraph.style = styles['Normal']
+
+# durchläuft alle Absätze und sucht Nummerierungen und fügt "<ol>" davor und "</ol>" danach ein. !! This doesnt work !!
 for paragraph in document.paragraphs:
     if paragraph.style.name == 'List Number':
         paragraph.text = '<ol>' + paragraph.text + '</ol>'
-        
+
 # durchläuft den Text des ganzen Dokuments und sucht nach kursivem Text und fügt davor "<italic>" ein und danach "</italic>"
 for paragraph in document.paragraphs:
     for run in paragraph.runs:
@@ -78,4 +83,4 @@ for paragraph in document.paragraphs:
 
 
 # speichert das bearb. Dokument im "output" Ordner ohne den Namen zu ändern
-document.save('output/word.docx')
+document.save('/mnt/c/Users/aecke/Desktop/python/output/' + filename) # Hier muss der Pfad angegeben werden, wo die bearbeiteten Dateien gespeichert werden sollen.
