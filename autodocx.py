@@ -15,9 +15,24 @@ for filename in os.listdir(directory):
         document = Document(filepath)
 
 
-
 styles = document.styles
 # Bei den folgenden Schleifen wird nach den jeweiligen Styles gesucht und die entsprechenden Tags hinzugefügt. Beim Style.name muss dann der Name der Formatvorlage eingetragen werden.
+
+
+# durchläuft alle Absätze und sucht nach Title und fügt davor "<title>" ein und danach "</title>".
+for paragraph in document.paragraphs:
+    if paragraph.style.name == 'Title':
+        paragraph.text = '<?xml version="1.0" encoding="UTF-8"?><doc><meta><title>' + paragraph.text + '</title>'
+
+# durchläuft alle Absätze und sucht nach Subtitle und fügt davor "<subtitle>" ein und danach "</subtitle>".
+for paragraph in document.paragraphs:
+    if paragraph.style.name == 'Subtitle':
+        paragraph.text = '<subtitle>' + paragraph.text + '</subtitle>'
+
+# durchläuft alle Absätze und sucht nach author und fügt davor "<author>" ein und danach "</author>".
+for paragraph in document.paragraphs:
+    if paragraph.style.name == 'author':
+        paragraph.text = '<author>' + paragraph.text + '</author></meta>'
 
 # durchläuft alle Absätze und sucht nach Heading 1 und fügt davor "<h1>" ein und danach "</h1>".
 for paragraph in document.paragraphs:
@@ -54,32 +69,38 @@ for paragraph in document.paragraphs:
     if paragraph.style.name == 'Normal':
         paragraph.text = '<p>' + paragraph.text + '</p>'
 
-# durchläuft alle Absätze und sucht Paragraphen mit Bullets und fügt "<ul>" davor und "</ul>" danach ein.
+# durchläuft alle Absätze und sucht Paragraphen mit 'Aufzählungszeichen1' und formatiert den paragraphen als "normalen" Text und fügt "<ul>" davor und "</ul>" danach ein.
 for paragraph in document.paragraphs:
-    if paragraph.style.name == 'List Bullet':
+    if paragraph.style.name == 'Aufzählungszeichen1':
+        paragraph.style = styles['Normal']
         paragraph.text = '<ul>' + paragraph.text + '</ul>'
 
-# durchläuft alle Absätze und sucht Paragraphen mit Bullets und formatiert den paragraphen als "normalen" Text
+# durchläuft alle Absätze und sucht Paragraphen mit 'Listenabsatz1' und formatiert den paragraphen als "normalen" Text und fügt "<ol>" davor und "</ol>" danach ein.
 for paragraph in document.paragraphs:
-    if paragraph.style.name == 'List Bullet': # formatiert den paragraphen als "normalen" Text 
+    if paragraph.style.name == 'Listenabsatz1':
         paragraph.style = styles['Normal']
-
-# durchläuft alle Absätze und sucht Nummerierungen und fügt "<ol>" davor und "</ol>" danach ein. !! This doesnt work !!
-for paragraph in document.paragraphs:
-    if paragraph.style.name == 'List Number':
         paragraph.text = '<ol>' + paragraph.text + '</ol>'
 
-# durchläuft den Text des ganzen Dokuments und sucht nach kursivem Text und fügt davor "<italic>" ein und danach "</italic>"
+# durchläuft die Text runs und sucht nach der Formatvorlage 'Standard kursiv' und fügt vor der Run "<italic>" ein und danach "</italic>"
 for paragraph in document.paragraphs:
     for run in paragraph.runs:
         if run.italic:
             run.text = '<italic>' + run.text + '</italic>'
+
 
 # durchläuft den Text und sucht nach fettgedrucktem Text und fügt davor "<bold>" ein und danach "</bold>"
 for paragraph in document.paragraphs:
     for run in paragraph.runs:
         if run.bold:
             run.text = '<bold>' + run.text + '</bold>'
+
+
+
+# durchläuft den Text und sucht nach der Formatierung "doc_end" und ersetzt den Absatz mit "</doc>".
+for paragraph in document.paragraphs:
+    if paragraph.style.name == 'doc_end':
+        paragraph.text = '</doc>'
+
 
 
 # speichert das bearb. Dokument im "output" Ordner ohne den Namen zu ändern
