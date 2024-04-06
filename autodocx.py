@@ -2,7 +2,7 @@ import os
 from docx import Document
 
 # Directory containing the documents
-directory = '/mnt/c/Users/aecke/Desktop/python/input/'
+directory = '/your/file/path'
 
 # Iterate over all files in the directory
 for filename in os.listdir(directory):
@@ -104,4 +104,4 @@ for paragraph in document.paragraphs:
 
 
 # speichert das bearb. Dokument im "output" Ordner ohne den Namen zu ändern
-document.save('/mnt/c/Users/aecke/Desktop/python/output/' + filename) # Hier muss der Pfad angegeben werden, wo die bearbeiteten Dateien gespeichert werden sollen.
+document.save('/your/file/path' + filename) # Hier muss der Pfad angegeben werden, wo die bearbeiteten Dateien gespeichert werden sollen.
