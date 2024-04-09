@@ -1,8 +1,11 @@
 import os
 from docx import Document
 
-# Directory containing the documents
-directory = '/your/file/path'
+
+# _______ pre section _______
+
+# Defining directory containing the documents
+directory = '/mnt/c/Users/aecke/Desktop/python/input/'
 
 # Iterate over all files in the directory
 for filename in os.listdir(directory):
@@ -10,98 +13,117 @@ for filename in os.listdir(directory):
     if filename.endswith(".docx"):
         # Construct the full path to the document
         filepath = os.path.join(directory, filename)
-        
         # Open the document
         document = Document(filepath)
 
-
+# Defining styles, needed for the more complicated and custom styles (e.g. lists, bold, italic, etc.) so far.
 styles = document.styles
-# Bei den folgenden Schleifen wird nach den jeweiligen Styles gesucht und die entsprechenden Tags hinzugefügt. Beim Style.name muss dann der Name der Formatvorlage eingetragen werden.
+
+# _______ pre section end _______
 
 
-# durchläuft alle Absätze und sucht nach Title und fügt davor "<title>" ein und danach "</title>".
+# _______ built-in section _______
+
+# Following loops iterate for Word built-in-styles and adds a corresponding <tags>. looping for
+#   Title
+#   Subtitle
+#   Heading 1; Heading 2; Heading 3; Heading 4; Heading 5; Heading 6;
+#   Normal
+# 
+
+# Title
 for paragraph in document.paragraphs:
     if paragraph.style.name == 'Title':
         paragraph.text = '<?xml version="1.0" encoding="UTF-8"?><doc><meta><title>' + paragraph.text + '</title>'
 
-# durchläuft alle Absätze und sucht nach Subtitle und fügt davor "<subtitle>" ein und danach "</subtitle>".
+# Subtitle
 for paragraph in document.paragraphs:
     if paragraph.style.name == 'Subtitle':
         paragraph.text = '<subtitle>' + paragraph.text + '</subtitle>'
 
-# durchläuft alle Absätze und sucht nach author und fügt davor "<author>" ein und danach "</author>".
-for paragraph in document.paragraphs:
-    if paragraph.style.name == 'author':
-        paragraph.text = '<author>' + paragraph.text + '</author></meta>'
-
-# durchläuft alle Absätze und sucht nach Heading 1 und fügt davor "<h1>" ein und danach "</h1>".
+# Heading 1
 for paragraph in document.paragraphs:
     if paragraph.style.name == 'Heading 1':
         paragraph.text = '<h1>' + paragraph.text + '</h1>'
 
-# durchläuft alle Absätze und sucht nach Heading 2 und fügt davor "<h2>" ein und danach "</h2>"
+# Heading 2
 for paragraph in document.paragraphs:
     if paragraph.style.name == 'Heading 2':
         paragraph.text = '<h2>' + paragraph.text + '</h2>'
 
-# durchläuft alle Absätze und sucht nach Heading 3 und fügt davor "<h3>" ein und danach "</h3>"
+# Heading 3
 for paragraph in document.paragraphs:
     if paragraph.style.name == 'Heading 3':
         paragraph.text = '<h3>' + paragraph.text + '</h3>'
 
-# durchläuft alle Absätze und sucht nach Heading 4 und fügt davor "<h4>" ein und danach "</h4>"
+# Heading 4
 for paragraph in document.paragraphs:
     if paragraph.style.name == 'Heading 4':
         paragraph.text = '<h4>' + paragraph.text + '</h4>'
 
-# durchläuft alle Absätze und sucht nach Heading 5 und fügt davor "<h5>" ein und danach "</h5>"
+# Heading 5
 for paragraph in document.paragraphs:
     if paragraph.style.name == 'Heading 5':
         paragraph.text = '<h5>' + paragraph.text + '</h5>'
 
-# durchläuft alle Absätze und sucht nach Heading 6 und fügt davor "<h6>" ein und danach "</h6>"
+# Heading 6
 for paragraph in document.paragraphs:
     if paragraph.style.name == 'Heading 6':
         paragraph.text = '<h6>' + paragraph.text + '</h6>'
 
-# durchläuft alle Absätze und sucht nach Paragraph oder "Fließtext" und fügt davor "<p>" ein und danach "</p>"
+# Normal
 for paragraph in document.paragraphs:
     if paragraph.style.name == 'Normal':
         paragraph.text = '<p>' + paragraph.text + '</p>'
 
-# durchläuft alle Absätze und sucht Paragraphen mit 'Aufzählungszeichen1' und formatiert den paragraphen als "normalen" Text und fügt "<ul>" davor und "</ul>" danach ein.
+# _______ built-in section end _______
+
+
+# _______ custom style section _______
+
+# Following loops iterate for Word custom styles (styles created by the user) and lists and adds desired <tags>. Loops must be given the exact style name from the word doc. <tags> must be defined in the "paragraph.text" argument.
+
+# List Bullet ('Aufzählungszeichen1') und formatiert den paragraphen als "normalen" Text und fügt "<ul>" davor und "</ul>" danach ein.
 for paragraph in document.paragraphs:
     if paragraph.style.name == 'Aufzählungszeichen1':
-        paragraph.style = styles['Normal']
+        paragraph.style = styles['Normal'] # could be that this is of no use, if the Lists can be converted with built-in-Style. The "styles = document.styles" argument could be deleted if so.
         paragraph.text = '<ul>' + paragraph.text + '</ul>'
 
-# durchläuft alle Absätze und sucht Paragraphen mit 'Listenabsatz1' und formatiert den paragraphen als "normalen" Text und fügt "<ol>" davor und "</ol>" danach ein.
+# List Number ('Listenabsatz1') und formatiert den paragraphen als "normalen" Text und fügt "<ol>" davor und "</ol>" danach ein.
 for paragraph in document.paragraphs:
     if paragraph.style.name == 'Listenabsatz1':
-        paragraph.style = styles['Normal']
+        paragraph.style = styles['Normal'] # could be that this is of no use, if the Lists can be converted with built-in-Style. The "styles = document.styles" argument could be deleted if so.
         paragraph.text = '<ol>' + paragraph.text + '</ol>'
 
-# durchläuft die Text runs und sucht nach der Formatvorlage 'Standard kursiv' und fügt vor der Run "<italic>" ein und danach "</italic>"
+# Italic ('Standard kursiv') und fügt vor der Run "<italic>" ein und danach "</italic>"
 for paragraph in document.paragraphs:
     for run in paragraph.runs:
         if run.italic:
             run.text = '<italic>' + run.text + '</italic>'
 
-
+# work in progress
 # durchläuft den Text und sucht nach fettgedrucktem Text und fügt davor "<bold>" ein und danach "</bold>"
 for paragraph in document.paragraphs:
     for run in paragraph.runs:
         if run.bold:
             run.text = '<bold>' + run.text + '</bold>'
 
+# author
+for paragraph in document.paragraphs:
+    if paragraph.style.name == 'author':
+        paragraph.text = '<author>' + paragraph.text + '</author></meta>'
 
-
-# durchläuft den Text und sucht nach der Formatierung "doc_end" und ersetzt den Absatz mit "</doc>".
+# doc_end
 for paragraph in document.paragraphs:
     if paragraph.style.name == 'doc_end':
         paragraph.text = '</doc>'
 
+# _______ custom style section end _______
 
 
-# speichert das bearb. Dokument im "output" Ordner ohne den Namen zu ändern
-document.save('/your/file/path' + filename) # Hier muss der Pfad angegeben werden, wo die bearbeiteten Dateien gespeichert werden sollen.
+# _______ post section _______
+
+# save edited file to a output directory
+document.save('/mnt/c/Users/aecke/Desktop/python/output/' + filename) # Don't forget to change the path to your desired output directory.
+
+# _______ post section end _______
