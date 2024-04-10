@@ -5,7 +5,7 @@ from docx import Document
 # _______ pre section _______
 
 # Defining directory containing the documents
-directory = '/mnt/c/Users/aecke/Desktop/python/input/'
+directory = '/path/to/your/directory/'
 
 # Iterate over all files in the directory
 for filename in os.listdir(directory):
@@ -124,6 +124,6 @@ for paragraph in document.paragraphs:
 # _______ post section _______
 
 # save edited file to a output directory
-document.save('/mnt/c/Users/aecke/Desktop/python/output/' + filename) # Don't forget to change the path to your desired output directory.
+document.save('/path/to/your/directory/' + filename) # Don't forget to change the path to your desired output directory.
 
 # _______ post section end _______
