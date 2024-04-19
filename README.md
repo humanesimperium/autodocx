@@ -11,10 +11,9 @@ This project is a non-professional project, using the AI Github-Copilot to compl
 This script is tested in an Windows 10 WSL Environment, which is the Linux Kernel running on Ubuntu ... Running on native Linux Ubuntu should be no problem. Other Unix-Environment should also work, although it is not tested. No testing nor installation on native Windows intended. 
 
 ## How to use (so far)
-1. Drop any docx-file into desired directory.
-2. Implement file path in the autodocx.py to where you dropped the docx. 
-3. Implement file path in the autodocx.py to where you want to save the output.
-4. Run.
+1. Implement file path in the autodocx.py to where you have the docx. 
+2. Implement file path in the autodocx.py to where you want to save the output.
+3. Run.
 
 ## Troubleshooting
 ### single styles don´t get converted
