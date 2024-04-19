@@ -13,7 +13,8 @@ This script is tested in an Windows 10 WSL Environment, which is the Linux Kerne
 ## How to use (so far)
 1. Implement file path in the autodocx.py to where you have the docx. 
 2. Implement file path in the autodocx.py to where you want to save the output.
-3. Run.
+3. Implement those paths to the clean_lists.py in the subprocess directory
+4. Run.
 
 ## Troubleshooting
 ### single styles don´t get converted
