@@ -5,12 +5,11 @@
 2. Providing generel information about the project in the repository.
 
 ## Docx to XML
-1. Create a template for converting .docx
-2. Generalize template via built-in Styles as meta-formatting.
+1. Finalize a template for converting .docx
+2. Generalize template via built-in Styles as meta-formatting as much as possible.
 
-## XML to real XML
-1. Optimize process of auto-formatting the XML
-2. Work towards well-formed criteria.
+## Try not to cry
+### cry a lot
 
 ## XML to PDF/... via PrintCSS
 1. Write PrintCSS for converting XML to Print-PDF
