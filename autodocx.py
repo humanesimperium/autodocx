@@ -46,8 +46,7 @@ def docx_to_xml(docx_path, xml_path):
 
 ### Converting Italic and Bold. Doesnt work yet
 
-
-
+# save converted file
     with open(xml_path, "w") as xml_file:
         xml_file.write("<document>{}</document>".format(xml_content))
 
@@ -55,5 +54,5 @@ def docx_to_xml(docx_path, xml_path):
 # Replace 'output.xml' with the path where you want to save the XML file
 docx_to_xml('input.docx', 'output.xml')
 
-exec(open('/mnt/c/Users/aecke/Desktop/python/autodocx/subprocesses/clean_lists.py').read())
+exec(open('path/to/the/repository/autodocx/subprocesses/clean_lists.py').read())
 exit()
