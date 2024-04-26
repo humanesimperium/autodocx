@@ -58,5 +58,5 @@ def docx_to_xml(docx_path, xml_path):
 docx_to_xml('input.docx', 'output.xml')
 
 # some script to clean the lists in the xml file
-exec(open('/mnt/c/Users/aecke/Desktop/python/autodocx/subprocesses/clean_lists.py').read())
+exec(open('path/to/the/repository/autodocx/subprocesses/clean_lists.py').read())
 exit()
