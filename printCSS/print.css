@@ -18,7 +18,14 @@
     @top-left {                         /* Muss das hier bei @page eingerückt werden, oder kann/muss das auch auf der ersten Ebene sein? */
         content: string(chapter);
     }
+}
 
+    /* footnote properties */
+fn {
+    float: footnote;                /* Damit sollten theoretisch <fn> tags (Fußnoten) über PrintCSS zu fußnoten werden. Dafür müsste im Haupttext also im Run/Textfluss die Fußnote mit <fn>...</fn> eingefügt sein */   
+}
+
+@page {
     @footnote {                         /* warum ist hier die footnote als Error angegeben */
         content: counter(footnote);
         float: bottom page;
