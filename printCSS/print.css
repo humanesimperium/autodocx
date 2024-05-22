@@ -10,23 +10,23 @@
     marks: crop cross;
 
     /* page numbering */
-    @bottom-right {                     /* Muss das hier bei @page eingerückt werden, oder kann/muss das auch auf der ersten Ebene sein? Warum ist das nicht lila?*/
+    @bottom-right {                     /* unsure, where to put it */
         content: counter(page);
     }
 
     /* living head properties */ 
-    @top-left {                         /* Muss das hier bei @page eingerückt werden, oder kann/muss das auch auf der ersten Ebene sein? */
+    @top-left {                         /* same */
         content: string(chapter);
     }
 }
 
     /* footnote properties */
 fn {
-    float: footnote;                /* Damit sollten theoretisch <fn> tags (Fußnoten) über PrintCSS zu fußnoten werden. Dafür müsste im Haupttext also im Run/Textfluss die Fußnote mit <fn>...</fn> eingefügt sein */   
+    float: footnote;                /* Should convert text nested in the <fn> tags to a footnote */   
 }
 
 @page {
-    @footnote {                         /* warum ist hier die footnote als Error angegeben */
+    @footnote {                         /* error? */
         content: counter(footnote);
         float: bottom page;
         border-top: thin solid black;
@@ -34,6 +34,29 @@ fn {
         padding-top: 1 mm;
     }
 }
+
+    /* title properties */
+title {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 32pt;
+    font-weight: bold;
+    margin-bottom: 20px;
+    display: block;
+    text-align: right;
+}
+
+subtitle {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 24pt;
+    font-weight: bold;
+    margin-bottom: 20px;
+    display: block;
+    text-align: right;
+    color: darkgray;
+    page-break-after: always;
+}
+
+
 
     /* general heading properties */
 h1, h2, h3, h4, h5, h6 {
@@ -108,4 +131,34 @@ table {
     table-layout: auto;
 }
 
-    /* general list properties */   /* Nehme hier das, was ich zuhause schon gemacht habe */
+    /* general list properties */
+ul {
+    display: block;
+    margin-left: 20px;
+    margin-bottom: 20px;
+    list-style-type: disc;
+}
+
+ul li {
+    display: list-item;
+}
+
+ol {
+    display: block;
+    margin-left: 20px;
+    margin-bottom: 20px;
+    list-style-type: decimal;
+}
+
+ol li {
+    display: list-item;
+}
+
+    /* Italic and bold */
+i {
+    font-style: italic;
+}
+
+b {
+    font-weight: bold;
+}
