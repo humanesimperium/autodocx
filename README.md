@@ -24,3 +24,5 @@ for style in document.styles:
     print("style.name == %s" % style.name)
 ```
 This prints a list of all implemented styles in the document. If your style isn´t there, it won´t get converted. No error message or something else, it just won´t work.
+#### fix
+Just format some paragraphs with the desired style in the docx. This inserts the style into the docx. Problem solved.
